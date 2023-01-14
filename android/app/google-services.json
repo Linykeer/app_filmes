@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "308219045471",
+    "project_id": "app-filmes-88fc8",
+    "storage_bucket": "app-filmes-88fc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308219045471:android:7c92ab52588e1c4c4d1dea",
+        "android_client_info": {
+          "package_name": "br.com.lasistem.app_filmes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308219045471-6i3am7v464sqkt4n46dpflsh73epdiig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpKdwu_K8uIbuxhbHULQcr0GcmGiSCJqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308219045471-6i3am7v464sqkt4n46dpflsh73epdiig.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "308219045471-9e0n9aa5l6gacqun609blrovpr2m6fp7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.lasistem.appFilmes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
