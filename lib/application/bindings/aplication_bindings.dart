@@ -1,4 +1,5 @@
 import 'package:app_filmes/application/auth/auth_service.dart';
+import 'package:app_filmes/application/rest_client/rest_client.dart';
 import 'package:app_filmes/repository/login/login_repository.dart';
 import 'package:app_filmes/repository/login/login_repository_impl.dart';
 import 'package:app_filmes/services/login/login_service.dart';
@@ -17,6 +18,7 @@ class AplicationBindings implements Bindings {
               loginRepository: Get.find(),
             ),
         fenix: true);
+    Get.lazyPut(() => RestClient(), fenix: true);
     Get.put(AuthService()).init();
   }
 }
