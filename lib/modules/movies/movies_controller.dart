@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:app_filmes/application/auth/auth_service.dart';
 import 'package:app_filmes/application/ui/messages/messages_mixin.dart';
 import 'package:app_filmes/models/genre_model.dart';
 import 'package:app_filmes/models/movie_model.dart';
@@ -11,6 +12,7 @@ class MoviesController extends GetxController with MessageMixin {
   final GenresService _genresService;
   final _message = Rxn<MessageModel>();
   final MoviesService _moviesService;
+  final AuthService _authService;
   final genres = <GenreModel>[].obs;
   final popularMovies = <MovieModel>[].obs;
   final topRatedMovies = <MovieModel>[].obs;
@@ -22,8 +24,10 @@ class MoviesController extends GetxController with MessageMixin {
   MoviesController({
     required GenresService genresService,
     required MoviesService moviesService,
+    required AuthService authService,
   })  : _genresService = genresService,
-        _moviesService = moviesService;
+        _moviesService = moviesService,
+        _authService = authService;
 
   @override
   void onInit() {
@@ -37,16 +41,45 @@ class MoviesController extends GetxController with MessageMixin {
     try {
       final genresData = await _genresService.getGenres();
       genres.assignAll(genresData);
-
-      final popularMoviesData = await _moviesService.getPopularMovies();
-      final topRatedMoviesData = await _moviesService.getTopRated();
-      popularMovies.assignAll(popularMoviesData);
-      _popularMovies = popularMoviesData;
-      topRatedMovies.assignAll(topRatedMoviesData);
-      _topRatedOriginalMovies = topRatedMoviesData;
+      getMovies();
     } catch (e, s) {
       print(e);
       print(s);
+      _message(
+        MessageModel.error(
+            title: 'Erro', message: 'Erro ao carregar dados da pagina'),
+      );
+    }
+  }
+
+  Future<void> getMovies() async {
+    try {
+      var popularMoviesData = await _moviesService.getPopularMovies();
+      var topRatedMoviesData = await _moviesService.getTopRated();
+      final favorites = await getFavorites();
+
+      popularMoviesData = popularMoviesData.map((e) {
+        if (favorites.containsKey(e.id)) {
+          return e.copyWith(favorite: true);
+        } else {
+          return e.copyWith(favorite: false);
+        }
+      }).toList();
+
+      topRatedMoviesData = topRatedMoviesData.map((e) {
+        if (favorites.containsKey(e.id)) {
+          return e.copyWith(favorite: true);
+        } else {
+          return e.copyWith(favorite: false);
+        }
+      }).toList();
+
+      popularMovies.assignAll(popularMoviesData);
+      _popularMovies = popularMoviesData;
+
+      topRatedMovies.assignAll(topRatedMoviesData);
+      _topRatedOriginalMovies = topRatedMoviesData;
+    } catch (e) {
       _message(
         MessageModel.error(
             title: 'Erro', message: 'Erro ao carregar dados da pagina'),
@@ -88,5 +121,25 @@ class MoviesController extends GetxController with MessageMixin {
       popularMovies.assignAll(_popularMovies);
       topRatedMovies.assignAll(_topRatedOriginalMovies);
     }
+  }
+
+  Future<void> favoriteMovies(MovieModel movie) async {
+    final user = _authService.user;
+    if (user != null) {
+      var newMovie = movie.copyWith(favorite: !movie.favorite);
+      await _moviesService.addOrRemoveFavorite(user.uid, newMovie);
+      await getMovies();
+    }
+  }
+
+  Future<Map<int, MovieModel>> getFavorites() async {
+    var user = _authService.user;
+    if (user != null) {
+      final favorites = await _moviesService.getFavoriteMovies(user.uid);
+      return <int, MovieModel>{
+        for (var fav in favorites) fav.id: fav,
+      };
+    }
+    return {};
   }
 }

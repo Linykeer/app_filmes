@@ -32,6 +32,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "cloud_firestore",
+      "rootUri": "file:///Users/linykeeralmeida/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-4.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "cloud_firestore_platform_interface",
+      "rootUri": "file:///Users/linykeeralmeida/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_platform_interface-5.10.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "cloud_firestore_web",
+      "rootUri": "file:///Users/linykeeralmeida/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-3.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "collection",
       "rootUri": "file:///Users/linykeeralmeida/.pub-cache/hosted/pub.dartlang.org/collection-1.16.0",
       "packageUri": "lib/",
@@ -132,6 +150,12 @@
       "rootUri": "file:///Users/linykeeralmeida/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_rating_stars",
+      "rootUri": "file:///Users/linykeeralmeida/.pub-cache/hosted/pub.dartlang.org/flutter_rating_stars-1.0.3+4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_signin_button",
@@ -392,7 +416,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-01-23T16:38:01.858541Z",
+  "generated": "2023-01-26T23:42:10.344633Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }
